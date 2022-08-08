@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.SqlClient;
+using System.Text;
 using System.Windows.Forms;
 
 namespace Birthday
@@ -18,45 +19,43 @@ namespace Birthday
             Time.Text = time;
             timer1.Enabled = true;
         }
-
-        private void datagridview_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex == 2)
-                datagridview.Rows.Add(1);//add row
-            if (e.ColumnIndex == 3)
-                datagridview.Rows.RemoveAt(e.RowIndex);//delete row
-        }
-
         private void Check_Click(object sender, EventArgs e)
         {
-            int counter = 0;
-            string date_now = DateTime.Now.ToShortDateString();//دریافت تاریخ فعلی
-            string[] date_array = date_now.Split('/');//جداسازی روز و ماه و سال تاریخ فعلی
-            int day = Convert.ToInt32(date_array[0]);//ذخیره روز فعلی
-            int month = Convert.ToInt32(date_array[1]);//ذخیره ماه فعلی
-            for (int i = 0; i < datagridview.RowCount; i++)
+            try
             {
-                string temp1 = Convert.ToString(datagridview.Rows[i].Cells[3].Value);
-                string temp2 = temp1.Trim();
-                if (temp2 != "")//تست تاریخ تولد کارمند
+                int counter = 0;
+                string date_now = DateTime.Now.ToShortDateString();//دریافت تاریخ فعلی
+                string[] date_array = date_now.Split('/');//جداسازی روز و ماه و سال تاریخ فعلی
+                int day = Convert.ToInt32(date_array[0]);//ذخیره روز فعلی
+                int month = Convert.ToInt32(date_array[1]);//ذخیره ماه فعلی
+                for (int i = 0; i < datagridview.RowCount; i++)
                 {
-                    string employee = datagridview.Rows[i].Cells[3].Value.ToString().Trim();
-                    string date_employee = employee;//دریافت تاریخ تولد کارمند
-                    string[] date_employee_array = date_employee.Split('/', ' ');//جداسازی روز و ماه و سال
-                    int day_employee = Convert.ToInt32(date_employee_array[1]);//ذخیره روز تولد کارمند
-                    int month_employee = Convert.ToInt32(date_employee_array[0]);//ذخیره ماه تولد کارمند
-                    if (day_employee == day && month_employee == month)//تست ماه و روز کارمند با ماه و روز تاریخ فعلی
+                    string temp1 = Convert.ToString(datagridview.Rows[i].Cells[3].Value);
+                    string temp2 = temp1.Trim();
+                    if (temp2 != "")//تست تاریخ تولد کارمند
                     {
-                        counter++;
-                        if (Convert.ToString(datagridview.Rows[i].Cells[1].Value) != "")//خالی نبودن قسمت نام کارمند
-                            MessageBox.Show($"happy birthday {datagridview.Rows[i].Cells[1].Value.ToString().Trim()}");
-                        else//یه قدم تا کامل و بی نقص بودن برداشتم
-                            MessageBox.Show("happy birthday Anonymous:)");
+                        string date_employee = datagridview.Rows[i].Cells[3].Value.ToString().Trim();//دریافت تاریخ تولد کارمند
+                        string[] date_employee_array = date_employee.Split('/', ' ');//جداسازی روز و ماه و سال
+                        int day_employee = Convert.ToInt32(date_employee_array[1]);//ذخیره روز تولد کارمند
+                        int month_employee = Convert.ToInt32(date_employee_array[0]);//ذخیره ماه تولد کارمند
+                        if (day_employee == day && month_employee == month)//تست ماه و روز کارمند با ماه و روز تاریخ فعلی
+                        {
+                            counter++;
+                            if (Convert.ToString(datagridview.Rows[i].Cells[1].Value) != "")//خالی نبودن قسمت نام کارمند
+                                MessageBox.Show($"happy birthday {datagridview.Rows[i].Cells[1].Value.ToString().Trim()}");
+                            else//یه قدم تا کامل و بی نقص بودن برداشتم
+                                MessageBox.Show("happy birthday Anonymous:)");
+                        }
                     }
                 }
+                if (counter == 0)
+                    MessageBox.Show("متاسفانه امروز تولد کسی نیست");
             }
-            if (counter == 0)
-                MessageBox.Show("متاسفانه امروز تولد کسی نیست");
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}");
+            }
+
         }
 
         private void simpleButton2_Click(object sender, EventArgs e)
@@ -201,34 +200,41 @@ namespace Birthday
 
         private void simpleButton3_Click(object sender, EventArgs e)
         {
-            int counter = 0;
-            string date_now = DateTime.Now.ToShortDateString();//دریافت تاریخ فعلی
-            string[] date_array = date_now.Split('/');//جداسازی روز و ماه و سال تاریخ فعلی
-            int day = Convert.ToInt32(date_array[0]);//ذخیره روز فعلی
-            int month = Convert.ToInt32(date_array[1]);//ذخیره ماه فعلی
-            for (int i = 0; i < datagridview.RowCount; i++)
+            try
             {
-                string temp1 = Convert.ToString(datagridview.Rows[i].Cells[3].Value);
-                string temp2 = temp1.Trim();
-                if (temp2 != "")//تست تاریخ تولد کارمند
+                int counter = 0;
+                string date_now = DateTime.Now.ToShortDateString();//دریافت تاریخ فعلی
+                string[] date_array = date_now.Split('/');//جداسازی روز و ماه و سال تاریخ فعلی
+                int day = Convert.ToInt32(date_array[0]);//ذخیره روز فعلی
+                int month = Convert.ToInt32(date_array[1]);//ذخیره ماه فعلی
+                for (int i = 0; i < datagridview.RowCount; i++)
                 {
-                    string employee = datagridview.Rows[i].Cells[2].Value.ToString().Trim();
-                    string date_employee = employee;//دریافت تاریخ تولد کارمند
-                    string[] date_employee_array = date_employee.Split('/', ' ');//جداسازی روز و ماه و سال
-                    int day_employee = Convert.ToInt32(date_employee_array[3]);//ذخیره روز تولد کارمند
-                    int month_employee = Convert.ToInt32(date_employee_array[1]);//ذخیره ماه تولد کارمند
-                    if (day_employee == day && month_employee == month)//تست ماه و روز کارمند با ماه و روز تاریخ فعلی
+                    string temp1 = Convert.ToString(datagridview.Rows[i].Cells[3].Value);
+                    string temp2 = temp1.Trim();
+                    if (temp2 != "")//تست تاریخ تولد کارمند
                     {
-                        counter++;
-                        if (Convert.ToString(datagridview.Rows[i].Cells[1].Value) != "")//خالی نبودن قسمت نام کارمند
-                            MessageBox.Show($"happy birthday {datagridview.Rows[i].Cells[1].Value.ToString().Trim()}");
-                        else//یه قدم تا کامل و بی نقص بودن برداشتم
-                            MessageBox.Show("happy birthday Anonymous:)");//عملا هیچ وقت جواب نمیده
+                        string date_employee = datagridview.Rows[i].Cells[2].Value.ToString().Trim();//دریافت تاریخ تولد کارمند
+                        string[] date_employee_array = date_employee.Split('/', ' ');//جداسازی روز و ماه و سال
+                        int day_employee = Convert.ToInt32(date_employee_array[3]);//ذخیره روز تولد کارمند
+                        int month_employee = Convert.ToInt32(date_employee_array[1]);//ذخیره ماه تولد کارمند
+                        if (day_employee == day && month_employee == month)//تست ماه و روز کارمند با ماه و روز تاریخ فعلی
+                        {
+                            counter++;
+                            if (Convert.ToString(datagridview.Rows[i].Cells[1].Value) != "")//خالی نبودن قسمت نام کارمند
+                                MessageBox.Show($"happy birthday {datagridview.Rows[i].Cells[1].Value.ToString().Trim()}");
+                            else//یه قدم تا کامل و بی نقص بودن برداشتم
+                                MessageBox.Show("happy birthday Anonymous:)");//عملا هیچ وقت جواب نمیده
+                        }
                     }
                 }
+                if (counter == 0)
+                    MessageBox.Show("متاسفانه امروز تولد کسی نیست");
             }
-            if (counter == 0)
-                MessageBox.Show("متاسفانه امروز تولد کسی نیست");
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}");
+            }
+
         }
 
         private void simpleButton4_Click(object sender, EventArgs e)
@@ -308,135 +314,186 @@ namespace Birthday
 
         private void Add_Button_Click_1(object sender, EventArgs e)
         {
-            datagridview.Rows.Add();
-            int index = datagridview.RowCount - 1;
-            string id = ID_Textbox.Text,
-                firstname = Firstname_Textbox.Text,
-                lastname = Lastname_Textbox.Text,
-                sex = Sex_Textbox.Text,
-                age = Age_Textbox.Text;
-            datagridview.Rows.Add();
-            datagridview.Rows[index].Cells[0].Value = id;
-            datagridview.Rows[index].Cells[1].Value = firstname;
-            datagridview.Rows[index].Cells[2].Value = lastname;
-            datagridview.Rows[index].Cells[4].Value = sex;
-            datagridview.Rows[index].Cells[5].Value = age;
-            listBox1.Items.Add($"{firstname} {lastname}");
+            try
+            {
+                datagridview.Rows.Add();
+                int index = datagridview.RowCount - 1;
+                string id = ID_Textbox.Text,
+                    firstname = Firstname_Textbox.Text,
+                    lastname = Lastname_Textbox.Text,
+                    sex = Sex_Textbox.Text,
+                    age = Age_Textbox.Text;
+                datagridview.Rows[index].Cells[0].Value = id;
+                datagridview.Rows[index].Cells[1].Value = firstname;
+                datagridview.Rows[index].Cells[2].Value = lastname;
+                datagridview.Rows[index].Cells[4].Value = sex;
+                datagridview.Rows[index].Cells[5].Value = age;
+                listBox1.Items.Add($"{firstname} {lastname}");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}");
+            }
         }
-
         private void Search_Button_Click_1(object sender, EventArgs e)
         {
-            int index = comboBox1.SelectedIndex;
-            //search by id
-            if (index == 1)
+            try
             {
                 bool flag = false;
-                int length = datagridview.RowCount;
+                int index = comboBox1.SelectedIndex,
+                    length = datagridview.RowCount,
+                    counter = 0;
                 string id = ID_Textbox.Text;
-                for (int i = 0; i < length; i++)
-                {
-                    string temp = Convert.ToString(datagridview.Rows[i].Cells[0].Value);
-                    if (temp == id)
-                    {
-                        flag = true;
-                        MessageBox.Show($"{id} Found! it's in row {i + 1}");
-                    }
-                }
-                if (!flag)
-                    MessageBox.Show($"{id} Not found!");
-            }
-            //------------------//
-            //search by firstname
-            if (index == 2)
-            {
-                bool flag = false;
-                int length = datagridview.RowCount;
                 string firstname = Firstname_Textbox.Text;
-                for (int i = 0; i < length; i++)
-                {
-                    string temp = Convert.ToString(datagridview.Rows[i].Cells[1].Value);
-                    if (temp == firstname)
-                    {
-                        flag = true;
-                        MessageBox.Show($"{firstname} Found! it's in row {i + 1}");
-                    }
-                }
-                if (!flag)
-                    MessageBox.Show($"{firstname} Not found!");
-            }
-            //--------------------//
-            //search by lastname
-            if (index == 3)
-            {
-                bool flag = false;
-                int length = datagridview.RowCount;
                 string lastname = Lastname_Textbox.Text;
-                for (int i = 0; i < length; i++)
-                {
-                    string temp = Convert.ToString(datagridview.Rows[i].Cells[2].Value);
-                    if (temp == lastname)
-                    {
-                        flag = true;
-                        MessageBox.Show($"{lastname} Found! it's in row {i + 1}");
-                    }
-                }
-                if (!flag)
-                    MessageBox.Show($"{lastname} Not found!");
-            }
-            //------------------//
-            //search by sex
-            if (index == 4)
-            {
-                bool flag = false;
-                int length = datagridview.RowCount;
                 string sex = Sex_Textbox.Text;
-                for (int i = 0; i < length; i++)
-                {
-                    string temp = Convert.ToString(datagridview.Rows[i].Cells[4].Value);
-                    if (temp == sex)
-                    {
-                        flag = true;
-                        MessageBox.Show($"{sex} Found! it's in row {i + 1}");
-                    }
-                }
-                if (!flag)
-                    MessageBox.Show($"{sex} Not found!");
-            }
-            //---------------------//
-            //search by age
-            if (index == 5)
-            {
-                bool flag = false;
-                int length = datagridview.RowCount;
                 string age = Age_Textbox.Text;
-                for (int i = 0; i < length; i++)
+                #region ID
+                //search by id
+                if (index == 0)
                 {
-                    string temp = Convert.ToString(datagridview.Rows[i].Cells[5].Value);
-                    if (temp == age)
+
+                    for (int i = 0; i < length; i++)
                     {
-                        flag = true;
-                        MessageBox.Show($"{age} Found! it's in row {i + 1}");
+                        StringBuilder temp = new StringBuilder(Convert.ToString(datagridview.Rows[i].Cells[0].Value));
+                        if (Convert.ToString(temp) == id)
+                        {
+                            flag = true;
+                            counter++;
+                        }
+                    }
+                    if (flag)
+                        Record.Text = Convert.ToString(counter);
+                    if (!flag)
+                    {
+                        MessageBox.Show($"{id} Not found!");
                     }
                 }
-                if (!flag)
-                    MessageBox.Show($"{age} Not found!");
+                //------------------//
+                #endregion
+                #region Firstname
+                //search by firstname
+                if (index == 1)
+                {
+                    for (int i = 0; i < length; i++)
+                    {
+                        StringBuilder temp = new StringBuilder(Convert.ToString(datagridview.Rows[i].Cells[1].Value));
+                        if (Convert.ToString(temp) == firstname)
+                        {
+                            flag = true;
+                            counter++;
+                        }
+                    }
+                    if (flag)
+                        Record.Text = Convert.ToString(counter);
+                    if (!flag)
+                    {
+                        MessageBox.Show($"{firstname} Not found!");
+                    }
+                }
+                //--------------------//
+                #endregion
+                #region Lastname
+                //search by lastname
+                if (index == 2)
+                {
+                    for (int i = 0; i < length; i++)
+                    {
+                        StringBuilder temp = new StringBuilder(Convert.ToString(datagridview.Rows[i].Cells[2].Value));
+                        if (Convert.ToString(temp) == lastname)
+                        {
+                            flag = true;
+                            counter++;
+                        }
+                    }
+                    if (flag)
+                        Record.Text = Convert.ToString(counter);
+                    if (!flag)
+                    {
+                        MessageBox.Show($"{lastname} Not found!");
+                    }
+                }
+                //------------------//
+                #endregion
+                #region Sex
+                //search by sex
+                if (index == 3)
+                {
+                    for (int i = 0; i < length; i++)
+                    {
+                        StringBuilder temp = new StringBuilder(Convert.ToString(datagridview.Rows[i].Cells[4].Value));
+                        if (Convert.ToString(temp) == sex)
+                        {
+                            flag = true;
+                            counter++;
+                        }
+                    }
+                    if (flag)
+                        Record.Text = Convert.ToString(counter);
+                    if (!flag)
+                    {
+                        MessageBox.Show($"{sex} Not found!");
+                    }
+                }
+                //---------------------//
+                #endregion
+                #region Age
+                //search by age
+                if (index == 4)
+                {
+                    for (int i = 0; i < length; i++)
+                    {
+                        StringBuilder temp = new StringBuilder(Convert.ToString(datagridview.Rows[i].Cells[5].Value));
+                        if (Convert.ToString(temp) == age)
+                        {
+                            flag = true;
+                            counter++;
+                        }
+                    }
+                    if (flag)
+                        Record.Text = Convert.ToString(counter);
+                    if (!flag)
+                    {
+                        MessageBox.Show($"{age} Not found!");
+                    }
+                }
+                //---------------------//
+                #endregion
             }
-            //---------------------//
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}");
+            }
         }
 
         private void Remove_Row_Click(object sender, EventArgs e)
         {
-            int remove = Convert.ToInt32(Remove_Column_Textbox.Text);
-            datagridview.Rows.RemoveAt(remove);
-            listBox1.Items.RemoveAt(remove);
+            try
+            {
+                int remove = Convert.ToInt32(Remove_Column_Textbox.Text);
+                datagridview.Rows.RemoveAt(remove);
+                listBox1.Items.RemoveAt(remove);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}");
+            }
+
         }
 
         private void Clear_Button_Click(object sender, EventArgs e)
         {
-            datagridview.Rows.Clear();
-            listBox1.Items.Clear();
-        }
+            try
+            {
+                datagridview.Rows.Clear();
+                listBox1.Items.Clear();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}");
+            }
 
+        }
         private void timer1_Tick(object sender, EventArgs e)
         {
             string date = DateTime.Now.ToLongDateString();

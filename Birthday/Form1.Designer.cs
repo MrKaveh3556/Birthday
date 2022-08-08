@@ -30,6 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             this.datagridview = new System.Windows.Forms.DataGridView();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Firstname = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Lastname = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Sex = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Age = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Check = new DevExpress.XtraEditors.SimpleButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.Day = new System.Windows.Forms.ToolStripStatusLabel();
@@ -57,13 +63,9 @@
             this.Remove_Row = new DevExpress.XtraEditors.SimpleButton();
             this.Clear_Button = new DevExpress.XtraEditors.SimpleButton();
             this.Add_Button = new DevExpress.XtraEditors.SimpleButton();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Firstname = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Lastname = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Sex = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Age = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.label7 = new System.Windows.Forms.Label();
+            this.Record = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.datagridview)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -84,7 +86,36 @@
             this.datagridview.Name = "datagridview";
             this.datagridview.Size = new System.Drawing.Size(575, 195);
             this.datagridview.TabIndex = 0;
-            this.datagridview.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.datagridview_CellContentClick);
+            // 
+            // ID
+            // 
+            this.ID.HeaderText = "کد مشتری";
+            this.ID.Name = "ID";
+            // 
+            // Firstname
+            // 
+            this.Firstname.HeaderText = "نام";
+            this.Firstname.Name = "Firstname";
+            // 
+            // Lastname
+            // 
+            this.Lastname.HeaderText = "نام خانوادگی";
+            this.Lastname.Name = "Lastname";
+            // 
+            // DATE
+            // 
+            this.DATE.HeaderText = "Birthday";
+            this.DATE.Name = "DATE";
+            // 
+            // Sex
+            // 
+            this.Sex.HeaderText = "جنسیت";
+            this.Sex.Name = "Sex";
+            // 
+            // Age
+            // 
+            this.Age.HeaderText = "سن";
+            this.Age.Name = "Age";
             // 
             // Check
             // 
@@ -327,46 +358,36 @@
             this.Add_Button.Text = "Add";
             this.Add_Button.Click += new System.EventHandler(this.Add_Button_Click_1);
             // 
-            // ID
-            // 
-            this.ID.HeaderText = "کد مشتری";
-            this.ID.Name = "ID";
-            // 
-            // Firstname
-            // 
-            this.Firstname.HeaderText = "نام";
-            this.Firstname.Name = "Firstname";
-            // 
-            // Lastname
-            // 
-            this.Lastname.HeaderText = "نام خانوادگی";
-            this.Lastname.Name = "Lastname";
-            // 
-            // DATE
-            // 
-            this.DATE.HeaderText = "Birthday";
-            this.DATE.Name = "DATE";
-            // 
-            // Sex
-            // 
-            this.Sex.HeaderText = "جنسیت";
-            this.Sex.Name = "Sex";
-            // 
-            // Age
-            // 
-            this.Age.HeaderText = "سن";
-            this.Age.Name = "Age";
-            // 
             // timer1
             // 
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Vazirmatn", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(875, 148);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(71, 26);
+            this.label7.TabIndex = 44;
+            this.label7.Text = "Records:";
+            // 
+            // Record
+            // 
+            this.Record.Font = new System.Drawing.Font("Vazirmatn", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Record.Location = new System.Drawing.Point(937, 148);
+            this.Record.Name = "Record";
+            this.Record.Size = new System.Drawing.Size(59, 26);
+            this.Record.TabIndex = 45;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(996, 368);
+            this.Controls.Add(this.Record);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.Remove_Column_Textbox);
@@ -440,6 +461,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Sex;
         private System.Windows.Forms.DataGridViewTextBoxColumn Age;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label Record;
     }
 }
 
